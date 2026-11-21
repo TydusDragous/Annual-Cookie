@@ -111,6 +111,10 @@
         }
 
 
+        /* =====================================================
+           EMPLOYEE CARD
+           ===================================================== */
+
         .employee-card {
             max-width: 520px;
 
@@ -169,6 +173,10 @@
         }
 
 
+        /* =====================================================
+           IMAGE BUTTONS
+           ===================================================== */
+
         .image-button {
             padding: 0;
 
@@ -214,6 +222,10 @@
             -webkit-user-drag: none;
         }
 
+
+        /* =====================================================
+           GIFT BOX
+           ===================================================== */
 
         #giftBox {
             margin-top: 25px;
@@ -271,6 +283,10 @@
 
         }
 
+
+        /* =====================================================
+           COOKIE
+           ===================================================== */
 
         #cookieStage {
             position: relative;
@@ -337,6 +353,10 @@
             letter-spacing: 1px;
         }
 
+
+        /* =====================================================
+           COUNTDOWN
+           ===================================================== */
 
         #countdown {
             position: absolute;
@@ -435,6 +455,10 @@
 
         }
 
+
+        /* =====================================================
+           EXPLOSION
+           ===================================================== */
 
         #flash {
             position: fixed;
@@ -651,6 +675,10 @@
         }
 
 
+        /* =====================================================
+           AWARD SCREEN
+           ===================================================== */
+
         #awardScreen {
             animation:
                 awardEntrance
@@ -784,6 +812,10 @@
         }
 
 
+        /* =====================================================
+           FINAL GIFT
+           ===================================================== */
+
         #finalScreen {
             animation:
                 finalEntrance
@@ -886,15 +918,6 @@
         }
 
 
-        .reward-name {
-            margin-top: 15px;
-
-            font-size: 23px;
-
-            font-weight: 500;
-        }
-
-
         .game-key-label {
             margin-top: 24px;
 
@@ -909,14 +932,14 @@
         #gameCode {
             margin-top: 8px;
 
-            padding: 14px;
+            padding: 16px;
 
             border:
                 1px solid #303840;
 
             background: #090c0f;
 
-            color: white;
+            color: #d7dde2;
 
             font-family:
                 Consolas,
@@ -926,7 +949,7 @@
 
             letter-spacing: 1px;
 
-            word-break: break-all;
+            text-align: center;
         }
 
 
@@ -935,7 +958,7 @@
 
             margin-top: 10px;
 
-            padding: 12px;
+            padding: 13px;
 
             border:
                 1px solid #3a434c;
@@ -945,6 +968,12 @@
             color: #dce2e7;
 
             cursor: pointer;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            letter-spacing: 1px;
         }
 
 
@@ -967,6 +996,10 @@
             letter-spacing: 1.2px;
         }
 
+
+        /* =====================================================
+           MOBILE
+           ===================================================== */
 
         @media (max-width: 600px) {
 
@@ -1003,12 +1036,11 @@
     <div id="blast"></div>
 
 
-
     <main id="app">
 
 
         <!-- =================================================
-             SCREEN 1 — GIFT
+             SCREEN 1 — BIRTHDAY BONUS
              ================================================= -->
 
         <section id="giftScreen">
@@ -1035,7 +1067,6 @@
                 has been approved by executive management.
 
             </p>
-
 
 
             <div class="employee-card">
@@ -1096,7 +1127,6 @@
             </div>
 
 
-
             <button id="giftBox"
                     class="image-button"
                     type="button">
@@ -1108,7 +1138,6 @@
 
 
             </button>
-
 
 
             <p class="subtitle">
@@ -1145,7 +1174,6 @@
             </h1>
 
 
-
             <div id="cookieStage"
                  class="cookie-arrival">
 
@@ -1162,7 +1190,6 @@
                 </button>
 
 
-
                 <div id="countdown"
                      class="hidden">
 
@@ -1174,7 +1201,6 @@
             </div>
 
 
-
             <div class="cookie-payment">
 
                 PAYMENT ISSUED:
@@ -1183,12 +1209,13 @@
             </div>
 
 
-
             <div id="reclamationWarning"
                  class="hidden">
 
                 UNAUTHORIZED COMPENSATION DETECTED
+
                 <br>
+
                 ASSET RECLAMATION INITIATED
 
             </div>
@@ -1199,7 +1226,7 @@
 
 
         <!-- =================================================
-             SCREEN 3 — AWARD
+             SCREEN 3 — FELL FOR IT
              ================================================= -->
 
         <section id="awardScreen"
@@ -1212,7 +1239,6 @@
                 ACHIEVEMENT SYSTEM
 
             </div>
-
 
 
             <button id="awardButton"
@@ -1259,7 +1285,7 @@
 
 
         <!-- =================================================
-             SCREEN 4 — ACTUAL GIFT
+             SCREEN 4 — ACTUAL BIRTHDAY GIFT
              ================================================= -->
 
         <section id="finalScreen"
@@ -1283,7 +1309,6 @@
             </h1>
 
 
-
             <p class="birthday-message">
 
                 Following a direct review by your
@@ -1299,7 +1324,6 @@
             </p>
 
 
-
             <div class="reward-card">
 
 
@@ -1311,24 +1335,16 @@
                 </div>
 
 
-                <div id="gameName"
-                     class="reward-name">
-
-                    GAME NAME GOES HERE
-
-                </div>
-
-
                 <div class="game-key-label">
 
-                    REDEMPTION CODE
+                    BIRTHDAY COMPENSATION PACKAGE
 
                 </div>
 
 
                 <div id="gameCode">
 
-                    GAME-CODE-GOES-HERE
+                    GAME CODE HIDDEN CAUSE STREAMING
 
                 </div>
 
@@ -1336,13 +1352,12 @@
                 <button id="copyButton"
                         type="button">
 
-                    COPY CODE
+                    COPY GAME CODE
 
                 </button>
 
 
             </div>
-
 
 
             <div class="precedent">
@@ -1359,7 +1374,9 @@
 
 
 
-    <!-- AUDIO -->
+    <!-- =====================================================
+         AUDIO
+         ===================================================== -->
 
     <audio id="countdownAudio"
            src="countdown.mp3"
@@ -1384,17 +1401,20 @@
 
 
         /* =====================================================
-           ONLY CHANGE THESE TWO WHEN YOU HAVE THE REAL GIFT
+           REAL GAME CODE
+
+           NEVER DISPLAY THIS ON SCREEN.
+           THE BUTTON COPIES IT DIRECTLY.
            ===================================================== */
 
-        const GAME_NAME =
-            "GAME NAME GOES HERE";
-
-
         const GAME_CODE =
-            "GAME-CODE-GOES-HERE";
+            "J2EA2-W4WWL-56XY6";
 
 
+
+        /* =====================================================
+           PAGE ELEMENTS
+           ===================================================== */
 
         const app =
             document.getElementById(
@@ -1498,39 +1518,19 @@
             );
 
 
-        const gameName =
-            document.getElementById(
-                "gameName"
-            );
-
-
-        const gameCode =
-            document.getElementById(
-                "gameCode"
-            );
-
-
         const copyButton =
             document.getElementById(
                 "copyButton"
             );
 
 
-        let countdownStarted = false;
-
-
-
-        gameName.textContent =
-            GAME_NAME;
-
-
-        gameCode.textContent =
-            GAME_CODE;
+        let countdownStarted =
+            false;
 
 
 
         /* =====================================================
-           OPEN GIFT
+           OPEN GIFT BOX
            ===================================================== */
 
         giftBox.addEventListener(
@@ -1538,7 +1538,8 @@
             () => {
 
 
-                giftBox.disabled = true;
+                giftBox.disabled =
+                    true;
 
 
                 giftBox.classList.add(
@@ -1572,7 +1573,7 @@
 
 
         /* =====================================================
-           COOKIE
+           CLICK COOKIE
            ===================================================== */
 
         cookieButton.addEventListener(
@@ -1585,7 +1586,8 @@
                 }
 
 
-                countdownStarted = true;
+                countdownStarted =
+                    true;
 
 
                 cookieButton.disabled =
@@ -1636,7 +1638,8 @@
         function startCountdown() {
 
 
-            let seconds = 5;
+            let seconds =
+                5;
 
 
             countdown.textContent =
@@ -1656,19 +1659,24 @@
 
                     if (seconds === 2) {
 
+
                         countdown.style.fontSize =
                             "38px";
+
 
                     }
 
 
                     if (seconds === 1) {
 
+
                         countdown.style.fontSize =
                             "44px";
 
+
                         countdown.style.color =
                             "#ff1616";
+
 
                     }
 
@@ -1755,6 +1763,7 @@
             }, 180);
 
 
+
             setTimeout(() => {
 
 
@@ -1779,6 +1788,7 @@
 
 
             }, 950);
+
 
 
             setTimeout(() => {
@@ -1810,7 +1820,7 @@
 
 
         /* =====================================================
-           AWARD
+           CLICK FELL FOR IT AWARD
            ===================================================== */
 
         awardButton.addEventListener(
@@ -1834,7 +1844,7 @@
 
 
         /* =====================================================
-           COPY CODE
+           COPY HIDDEN GAME CODE
            ===================================================== */
 
         copyButton.addEventListener(
@@ -1842,16 +1852,12 @@
             async () => {
 
 
-                const code =
-                    GAME_CODE.trim();
-
-
                 try {
 
 
                     await navigator.clipboard
                         .writeText(
-                            code
+                            GAME_CODE
                         );
 
 
@@ -1863,7 +1869,7 @@
 
 
                         copyButton.textContent =
-                            "COPY CODE";
+                            "COPY GAME CODE";
 
 
                     }, 1500);
@@ -1871,11 +1877,65 @@
 
                 }
 
+
                 catch {
 
 
+                    /*
+                        Backup clipboard method
+                        for browsers that refuse
+                        navigator.clipboard.
+                    */
+
+
+                    const temporaryInput =
+                        document.createElement(
+                            "textarea"
+                        );
+
+
+                    temporaryInput.value =
+                        GAME_CODE;
+
+
+                    temporaryInput.style.position =
+                        "fixed";
+
+
+                    temporaryInput.style.opacity =
+                        "0";
+
+
+                    document.body.appendChild(
+                        temporaryInput
+                    );
+
+
+                    temporaryInput.select();
+
+
+                    document.execCommand(
+                        "copy"
+                    );
+
+
+                    document.body.removeChild(
+                        temporaryInput
+                    );
+
+
                     copyButton.textContent =
-                        "SELECT CODE MANUALLY";
+                        "COPIED";
+
+
+                    setTimeout(() => {
+
+
+                        copyButton.textContent =
+                            "COPY GAME CODE";
+
+
+                    }, 1500);
 
 
                 }
