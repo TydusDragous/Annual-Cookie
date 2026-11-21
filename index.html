@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dragous Estate Co. Employee Benefits Portal</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+
+            min-height: 100%;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    #1b2026 0%,
+                    #101317 60%,
+                    #090b0e 100%
+                );
+
+            color: #eef2f5;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow-x: hidden;
+        }
+
+
+        button {
+            font: inherit;
+        }
+
+
+        .hidden {
+            display: none !important;
+        }
+
+
+        #app {
+            width: min(900px, 94vw);
+
+            padding: 45px 20px;
+
+            text-align: center;
+        }
+
+
+        .system-label {
+            color: #7a858f;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 12px;
+        }
+
+
+        h1 {
+            margin: 0;
+
+            font-size:
+                clamp(30px, 6vw, 52px);
+
+            font-weight: 500;
+        }
+
+
+        .subtitle {
+            max-width: 620px;
+
+            margin:
+                12px auto 0;
+
+            color: #9ca6af;
+
+            font-size: 14px;
+
+            line-height: 1.7;
+        }
+
+
+        .employee-card {
+            max-width: 520px;
+
+            margin:
+                30px auto;
+
+            padding: 20px;
+
+            border:
+                1px solid #333a42;
+
+            background:
+                rgba(23, 27, 32, 0.9);
+
+            text-align: left;
+        }
+
+
+        .employee-row {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 20px;
+
+            padding:
+                10px 0;
+
+            border-bottom:
+                1px solid #292f35;
+
+            font-size: 12px;
+        }
+
+
+        .employee-row:last-child {
+            border-bottom: 0;
+        }
+
+
+        .employee-label {
+            color: #737d87;
+
+            letter-spacing: 1px;
+        }
+
+
+        .employee-value {
+            text-align: right;
+        }
+
+
+        .approved {
+            color: #6ac783;
+        }
+
+
+        .image-button {
+            padding: 0;
+
+            border: 0;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.18s ease,
+                filter 0.18s ease;
+        }
+
+
+        .image-button:hover {
+            transform:
+                scale(1.04);
+
+            filter:
+                brightness(1.08);
+        }
+
+
+        .image-button:active {
+            transform:
+                scale(0.97);
+        }
+
+
+        .image-button img {
+            display: block;
+
+            width:
+                min(360px, 78vw);
+
+            height: auto;
+
+            margin: auto;
+
+            user-select: none;
+
+            -webkit-user-drag: none;
+        }
+
+
+        #giftBox {
+            margin-top: 25px;
+
+            animation:
+                giftFloat 2.4s ease-in-out infinite;
+        }
+
+
+        @keyframes giftFloat {
+
+            0%,
+            100% {
+                transform:
+                    translateY(0);
+            }
+
+            50% {
+                transform:
+                    translateY(-8px);
+            }
+
+        }
+
+
+        #giftBox.opening {
+            animation:
+                giftOpening 0.55s ease forwards;
+        }
+
+
+        @keyframes giftOpening {
+
+            0% {
+                transform:
+                    scale(1);
+            }
+
+            40% {
+                transform:
+                    scale(1.13)
+                    rotate(-3deg);
+            }
+
+            70% {
+                transform:
+                    scale(1.05)
+                    rotate(2deg);
+            }
+
+            100% {
+                transform:
+                    scale(1);
+            }
+
+        }
+
+
+        #cookieStage {
+            position: relative;
+
+            width: fit-content;
+
+            margin:
+                28px auto 0;
+        }
+
+
+        #cookieStage.cookie-arrival {
+            animation:
+                cookieArrival 0.7s
+                cubic-bezier(
+                    .18,
+                    .89,
+                    .32,
+                    1.35
+                );
+        }
+
+
+        @keyframes cookieArrival {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(130px)
+                    scale(0.25)
+                    rotate(-25deg);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1)
+                    rotate(0);
+            }
+
+        }
+
+
+        #cookieButton img {
+            width:
+                min(330px, 72vw);
+        }
+
+
+        .cookie-payment {
+            margin-top: 18px;
+
+            color: #9ba5ae;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 1px;
+        }
+
+
+        #countdown {
+            position: absolute;
+
+            left: 50%;
+            top: 50%;
+
+            transform:
+                translate(-50%, -50%);
+
+            padding:
+                10px 15px;
+
+            border:
+                2px solid #7a1717;
+
+            background:
+                rgba(15, 0, 0, 0.93);
+
+            color:
+                #ff3b3b;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            letter-spacing: 3px;
+
+            pointer-events: none;
+
+            box-shadow:
+                0 0 25px
+                rgba(255, 0, 0, 0.3);
+        }
+
+
+        #reclamationWarning {
+            margin-top: 18px;
+
+            color: #e55353;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 11px;
+
+            letter-spacing: 1.3px;
+
+            line-height: 1.8;
+        }
+
+
+        .cookie-danger {
+            animation:
+                cookieShake 0.11s
+                linear infinite;
+        }
+
+
+        @keyframes cookieShake {
+
+            0% {
+                transform:
+                    translate(0, 0);
+            }
+
+            20% {
+                transform:
+                    translate(-3px, 2px);
+            }
+
+            40% {
+                transform:
+                    translate(3px, -2px);
+            }
+
+            60% {
+                transform:
+                    translate(-2px, -3px);
+            }
+
+            80% {
+                transform:
+                    translate(3px, 3px);
+            }
+
+            100% {
+                transform:
+                    translate(0, 0);
+            }
+
+        }
+
+
+        #flash {
+            position: fixed;
+
+            inset: 0;
+
+            background: white;
+
+            opacity: 0;
+
+            z-index: 1000;
+
+            pointer-events: none;
+        }
+
+
+        #flash.explode {
+            animation:
+                explosionFlash
+                0.7s ease-out;
+        }
+
+
+        @keyframes explosionFlash {
+
+            0% {
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            22% {
+                opacity: 0.95;
+            }
+
+            45% {
+                opacity: 0.45;
+            }
+
+            100% {
+                opacity: 0;
+            }
+
+        }
+
+
+        #blast {
+            position: fixed;
+
+            left: 50%;
+            top: 50%;
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 50%;
+
+            transform:
+                translate(-50%, -50%)
+                scale(0);
+
+            opacity: 0;
+
+            z-index: 900;
+
+            pointer-events: none;
+
+            background:
+                radial-gradient(
+                    circle,
+                    #ffffff 0%,
+                    #fff49a 15%,
+                    #ff9a27 35%,
+                    #e43f18 55%,
+                    transparent 72%
+                );
+        }
+
+
+        #blast.active {
+            animation:
+                blastExpansion
+                0.7s ease-out;
+        }
+
+
+        @keyframes blastExpansion {
+
+            0% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(0.1);
+
+                opacity: 1;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translate(-50%, -50%)
+                    scale(7);
+
+                opacity: 0;
+            }
+
+        }
+
+
+        .screen-shake {
+            animation:
+                screenShake
+                0.65s linear;
+        }
+
+
+        @keyframes screenShake {
+
+            0% {
+                transform:
+                    translate(0);
+            }
+
+            10% {
+                transform:
+                    translate(-15px, 8px);
+            }
+
+            20% {
+                transform:
+                    translate(14px, -9px);
+            }
+
+            30% {
+                transform:
+                    translate(-12px, -7px);
+            }
+
+            40% {
+                transform:
+                    translate(11px, 9px);
+            }
+
+            50% {
+                transform:
+                    translate(-9px, 7px);
+            }
+
+            60% {
+                transform:
+                    translate(8px, -8px);
+            }
+
+            70% {
+                transform:
+                    translate(-6px, 5px);
+            }
+
+            80% {
+                transform:
+                    translate(5px, -4px);
+            }
+
+            90% {
+                transform:
+                    translate(-3px, 2px);
+            }
+
+            100% {
+                transform:
+                    translate(0);
+            }
+
+        }
+
+
+        .cookie-explosion {
+            animation:
+                cookieExplosion
+                0.45s ease-out forwards;
+        }
+
+
+        @keyframes cookieExplosion {
+
+            0% {
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    rotate(0);
+            }
+
+            50% {
+                opacity: 1;
+
+                transform:
+                    scale(1.7)
+                    rotate(16deg);
+            }
+
+            100% {
+                opacity: 0;
+
+                transform:
+                    scale(3.2)
+                    rotate(-25deg);
+            }
+
+        }
+
+
+        #awardScreen {
+            animation:
+                awardEntrance
+                0.45s
+                cubic-bezier(
+                    .18,
+                    .89,
+                    .32,
+                    1.4
+                );
+        }
+
+
+        @keyframes awardEntrance {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    scale(1.8)
+                    rotate(-5deg);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    scale(1)
+                    rotate(0);
+            }
+
+        }
+
+
+        #awardButton {
+            display: block;
+
+            width:
+                min(600px, 94%);
+
+            margin:
+                20px auto;
+
+            padding: 24px;
+
+            border:
+                2px solid #d6ab42;
+
+            background:
+                #181818;
+
+            color: white;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            transition:
+                transform 0.16s ease,
+                border-color 0.16s ease;
+        }
+
+
+        #awardButton:hover {
+            transform:
+                scale(1.025);
+
+            border-color:
+                #f5cf64;
+        }
+
+
+        #awardButton img {
+            width:
+                min(360px, 75vw);
+
+            max-height:
+                380px;
+
+            object-fit:
+                contain;
+        }
+
+
+        .achievement-label {
+            margin-top: 18px;
+
+            color: #d6ab42;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+        }
+
+
+        .achievement-title {
+            margin-top: 8px;
+
+            font-size:
+                clamp(26px, 6vw, 40px);
+
+            font-weight: bold;
+        }
+
+
+        .achievement-description {
+            margin-top: 9px;
+
+            color: #a0a0a0;
+
+            font-size: 13px;
+        }
+
+
+        .achievement-click {
+            margin-top: 20px;
+
+            color: #666;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+        }
+
+
+        #finalScreen {
+            animation:
+                finalEntrance
+                0.45s
+                cubic-bezier(
+                    .18,
+                    .89,
+                    .32,
+                    1.2
+                );
+        }
+
+
+        @keyframes finalEntrance {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    scale(0.75);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    scale(1);
+            }
+
+        }
+
+
+        .executive-override {
+            color: #d6ae55;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .birthday-title {
+            font-size:
+                clamp(38px, 8vw, 70px);
+
+            font-weight: bold;
+
+            margin: 0;
+        }
+
+
+        .birthday-message {
+            max-width: 600px;
+
+            margin:
+                18px auto;
+
+            color: #abb4bc;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+
+        .reward-card {
+            max-width: 520px;
+
+            margin:
+                32px auto 0;
+
+            padding: 25px;
+
+            border:
+                1px solid #353d45;
+
+            background:
+                rgba(23, 27, 32, 0.92);
+
+            text-align: left;
+        }
+
+
+        .reward-status {
+            color: #6ac783;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 9px;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .reward-name {
+            margin-top: 15px;
+
+            font-size: 23px;
+
+            font-weight: 500;
+        }
+
+
+        .game-key-label {
+            margin-top: 24px;
+
+            color: #707a84;
+
+            font-size: 9px;
+
+            letter-spacing: 1.3px;
+        }
+
+
+        #gameCode {
+            margin-top: 8px;
+
+            padding: 14px;
+
+            border:
+                1px solid #303840;
+
+            background: #090c0f;
+
+            color: white;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 14px;
+
+            letter-spacing: 1px;
+
+            word-break: break-all;
+        }
+
+
+        #copyButton {
+            width: 100%;
+
+            margin-top: 10px;
+
+            padding: 12px;
+
+            border:
+                1px solid #3a434c;
+
+            background: transparent;
+
+            color: #dce2e7;
+
+            cursor: pointer;
+        }
+
+
+        #copyButton:hover {
+            background: #242a30;
+        }
+
+
+        .precedent {
+            margin-top: 26px;
+
+            color: #5f6871;
+
+            font-family:
+                Consolas,
+                monospace;
+
+            font-size: 9px;
+
+            letter-spacing: 1.2px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            #app {
+                padding:
+                    30px 14px;
+            }
+
+
+            .employee-row {
+                flex-direction:
+                    column;
+
+                gap: 5px;
+            }
+
+
+            .employee-value {
+                text-align: left;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div id="flash"></div>
+
+    <div id="blast"></div>
+
+
+
+    <main id="app">
+
+
+        <!-- =================================================
+             SCREEN 1 — GIFT
+             ================================================= -->
+
+        <section id="giftScreen">
+
+
+            <div class="system-label">
+
+                DRAGOUS ESTATE CO. //
+                EMPLOYEE BENEFITS DIVISION
+
+            </div>
+
+
+            <h1>
+
+                Birthday Bonus
+
+            </h1>
+
+
+            <p class="subtitle">
+
+                A discretionary employee benefit
+                has been approved by executive management.
+
+            </p>
+
+
+
+            <div class="employee-card">
+
+
+                <div class="employee-row">
+
+                    <span class="employee-label">
+                        EMPLOYEE
+                    </span>
+
+                    <span class="employee-value">
+                        MEMENTO
+                    </span>
+
+                </div>
+
+
+                <div class="employee-row">
+
+                    <span class="employee-label">
+                        DEPARTMENT
+                    </span>
+
+                    <span class="employee-value">
+                        PUBLIC RELATIONS
+                    </span>
+
+                </div>
+
+
+                <div class="employee-row">
+
+                    <span class="employee-label">
+                        STANDARD COMPENSATION
+                    </span>
+
+                    <span class="employee-value">
+                        1 COOKIE
+                    </span>
+
+                </div>
+
+
+                <div class="employee-row">
+
+                    <span class="employee-label">
+                        BIRTHDAY BONUS
+                    </span>
+
+                    <span class="employee-value approved">
+                        APPROVED BY CEO
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <button id="giftBox"
+                    class="image-button"
+                    type="button">
+
+
+                <img id="giftImage"
+                     src="gift-closed.png"
+                     alt="Birthday present">
+
+
+            </button>
+
+
+
+            <p class="subtitle">
+
+                Click package to accept compensation.
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 2 — COOKIE
+             ================================================= -->
+
+        <section id="cookieScreen"
+                 class="hidden">
+
+
+            <div class="system-label">
+
+                DRAGOUS ESTATE CO. //
+                COMPENSATION PACKAGE DISPENSED
+
+            </div>
+
+
+            <h1>
+
+                PR Retainer
+
+            </h1>
+
+
+
+            <div id="cookieStage"
+                 class="cookie-arrival">
+
+
+                <button id="cookieButton"
+                        class="image-button"
+                        type="button">
+
+
+                    <img src="cookie.png"
+                         alt="Chocolate chip cookie">
+
+
+                </button>
+
+
+
+                <div id="countdown"
+                     class="hidden">
+
+                    00:05
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="cookie-payment">
+
+                PAYMENT ISSUED:
+                1 COOKIE
+
+            </div>
+
+
+
+            <div id="reclamationWarning"
+                 class="hidden">
+
+                UNAUTHORIZED COMPENSATION DETECTED
+                <br>
+                ASSET RECLAMATION INITIATED
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 3 — AWARD
+             ================================================= -->
+
+        <section id="awardScreen"
+                 class="hidden">
+
+
+            <div class="system-label">
+
+                DRAGOUS ESTATE CO. //
+                ACHIEVEMENT SYSTEM
+
+            </div>
+
+
+
+            <button id="awardButton"
+                    type="button">
+
+
+                <img src="fell-for-it.png"
+                     alt="Fell for it again">
+
+
+                <div class="achievement-label">
+
+                    ACHIEVEMENT UNLOCKED
+
+                </div>
+
+
+                <div class="achievement-title">
+
+                    FELL FOR IT AGAIN
+
+                </div>
+
+
+                <div class="achievement-description">
+
+                    Attempted to claim company property.
+
+                </div>
+
+
+                <div class="achievement-click">
+
+                    CLICK TO ACKNOWLEDGE FAILURE
+
+                </div>
+
+
+            </button>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             SCREEN 4 — ACTUAL GIFT
+             ================================================= -->
+
+        <section id="finalScreen"
+                 class="hidden">
+
+
+            <div class="executive-override">
+
+                DRAGOUS ESTATE CO. //
+                EXECUTIVE OVERRIDE //
+                CEO AUTHORIZATION
+
+            </div>
+
+
+            <h1 class="birthday-title">
+
+                HAPPY BIRTHDAY,
+                MEMENTO!
+
+            </h1>
+
+
+
+            <p class="birthday-message">
+
+                Following a direct review by your
+                benevolent, generous, completely
+                non-tyrannical CEO, an alternative
+                birthday compensation package has
+                been authorized.
+
+                <br><br>
+
+                Your previous cookie claim remains denied.
+
+            </p>
+
+
+
+            <div class="reward-card">
+
+
+                <div class="reward-status">
+
+                    NON-COOKIE COMPENSATION //
+                    APPROVED
+
+                </div>
+
+
+                <div id="gameName"
+                     class="reward-name">
+
+                    GAME NAME GOES HERE
+
+                </div>
+
+
+                <div class="game-key-label">
+
+                    REDEMPTION CODE
+
+                </div>
+
+
+                <div id="gameCode">
+
+                    GAME-CODE-GOES-HERE
+
+                </div>
+
+
+                <button id="copyButton"
+                        type="button">
+
+                    COPY CODE
+
+                </button>
+
+
+            </div>
+
+
+
+            <div class="precedent">
+
+                THIS DOES NOT CONSTITUTE PRECEDENT.
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- AUDIO -->
+
+    <audio id="countdownAudio"
+           src="countdown.mp3"
+           preload="auto">
+    </audio>
+
+
+    <audio id="explosionAudio"
+           src="explosion.mp3"
+           preload="auto">
+    </audio>
+
+
+    <audio id="tf2Audio"
+           src="tf2-jingle.mp3"
+           preload="auto">
+    </audio>
+
+
+
+    <script>
+
+
+        /* =====================================================
+           ONLY CHANGE THESE TWO WHEN YOU HAVE THE REAL GIFT
+           ===================================================== */
+
+        const GAME_NAME =
+            "GAME NAME GOES HERE";
+
+
+        const GAME_CODE =
+            "GAME-CODE-GOES-HERE";
+
+
+
+        const app =
+            document.getElementById(
+                "app"
+            );
+
+
+        const giftScreen =
+            document.getElementById(
+                "giftScreen"
+            );
+
+
+        const giftBox =
+            document.getElementById(
+                "giftBox"
+            );
+
+
+        const giftImage =
+            document.getElementById(
+                "giftImage"
+            );
+
+
+        const cookieScreen =
+            document.getElementById(
+                "cookieScreen"
+            );
+
+
+        const cookieStage =
+            document.getElementById(
+                "cookieStage"
+            );
+
+
+        const cookieButton =
+            document.getElementById(
+                "cookieButton"
+            );
+
+
+        const countdown =
+            document.getElementById(
+                "countdown"
+            );
+
+
+        const reclamationWarning =
+            document.getElementById(
+                "reclamationWarning"
+            );
+
+
+        const awardScreen =
+            document.getElementById(
+                "awardScreen"
+            );
+
+
+        const awardButton =
+            document.getElementById(
+                "awardButton"
+            );
+
+
+        const finalScreen =
+            document.getElementById(
+                "finalScreen"
+            );
+
+
+        const flash =
+            document.getElementById(
+                "flash"
+            );
+
+
+        const blast =
+            document.getElementById(
+                "blast"
+            );
+
+
+        const countdownAudio =
+            document.getElementById(
+                "countdownAudio"
+            );
+
+
+        const explosionAudio =
+            document.getElementById(
+                "explosionAudio"
+            );
+
+
+        const tf2Audio =
+            document.getElementById(
+                "tf2Audio"
+            );
+
+
+        const gameName =
+            document.getElementById(
+                "gameName"
+            );
+
+
+        const gameCode =
+            document.getElementById(
+                "gameCode"
+            );
+
+
+        const copyButton =
+            document.getElementById(
+                "copyButton"
+            );
+
+
+        let countdownStarted = false;
+
+
+
+        gameName.textContent =
+            GAME_NAME;
+
+
+        gameCode.textContent =
+            GAME_CODE;
+
+
+
+        /* =====================================================
+           OPEN GIFT
+           ===================================================== */
+
+        giftBox.addEventListener(
+            "click",
+            () => {
+
+
+                giftBox.disabled = true;
+
+
+                giftBox.classList.add(
+                    "opening"
+                );
+
+
+                giftImage.src =
+                    "gift-open.png";
+
+
+                setTimeout(() => {
+
+
+                    giftScreen.classList.add(
+                        "hidden"
+                    );
+
+
+                    cookieScreen.classList.remove(
+                        "hidden"
+                    );
+
+
+                }, 850);
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           COOKIE
+           ===================================================== */
+
+        cookieButton.addEventListener(
+            "click",
+            () => {
+
+
+                if (countdownStarted) {
+                    return;
+                }
+
+
+                countdownStarted = true;
+
+
+                cookieButton.disabled =
+                    true;
+
+
+                countdown.classList.remove(
+                    "hidden"
+                );
+
+
+                reclamationWarning
+                    .classList.remove(
+                        "hidden"
+                    );
+
+
+                cookieStage.classList.add(
+                    "cookie-danger"
+                );
+
+
+                countdownAudio.currentTime =
+                    0;
+
+
+                countdownAudio.volume =
+                    0.9;
+
+
+                countdownAudio
+                    .play()
+                    .catch(() => {});
+
+
+                startCountdown();
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           COUNTDOWN
+           ===================================================== */
+
+        function startCountdown() {
+
+
+            let seconds = 5;
+
+
+            countdown.textContent =
+                "00:05";
+
+
+            const timer =
+                setInterval(() => {
+
+
+                    seconds--;
+
+
+                    countdown.textContent =
+                        "00:0" + seconds;
+
+
+                    if (seconds === 2) {
+
+                        countdown.style.fontSize =
+                            "38px";
+
+                    }
+
+
+                    if (seconds === 1) {
+
+                        countdown.style.fontSize =
+                            "44px";
+
+                        countdown.style.color =
+                            "#ff1616";
+
+                    }
+
+
+                    if (seconds <= 0) {
+
+
+                        clearInterval(
+                            timer
+                        );
+
+
+                        countdown.textContent =
+                            "00:00";
+
+
+                        setTimeout(
+                            explodeCookie,
+                            320
+                        );
+
+
+                    }
+
+
+                }, 1000);
+
+
+        }
+
+
+
+        /* =====================================================
+           EXPLOSION
+           ===================================================== */
+
+        function explodeCookie() {
+
+
+            countdownAudio.pause();
+
+
+            explosionAudio.currentTime =
+                0;
+
+
+            explosionAudio.volume =
+                0.8;
+
+
+            explosionAudio
+                .play()
+                .catch(() => {});
+
+
+            setTimeout(() => {
+
+
+                cookieStage.classList.remove(
+                    "cookie-danger"
+                );
+
+
+                cookieStage.classList.add(
+                    "cookie-explosion"
+                );
+
+
+                flash.classList.add(
+                    "explode"
+                );
+
+
+                blast.classList.add(
+                    "active"
+                );
+
+
+                app.classList.add(
+                    "screen-shake"
+                );
+
+
+            }, 180);
+
+
+            setTimeout(() => {
+
+
+                cookieScreen.classList.add(
+                    "hidden"
+                );
+
+
+                flash.classList.remove(
+                    "explode"
+                );
+
+
+                blast.classList.remove(
+                    "active"
+                );
+
+
+                app.classList.remove(
+                    "screen-shake"
+                );
+
+
+            }, 950);
+
+
+            setTimeout(() => {
+
+
+                awardScreen.classList.remove(
+                    "hidden"
+                );
+
+
+                tf2Audio.currentTime =
+                    0;
+
+
+                tf2Audio.volume =
+                    1;
+
+
+                tf2Audio
+                    .play()
+                    .catch(() => {});
+
+
+            }, 1750);
+
+
+        }
+
+
+
+        /* =====================================================
+           AWARD
+           ===================================================== */
+
+        awardButton.addEventListener(
+            "click",
+            () => {
+
+
+                awardScreen.classList.add(
+                    "hidden"
+                );
+
+
+                finalScreen.classList.remove(
+                    "hidden"
+                );
+
+
+            }
+        );
+
+
+
+        /* =====================================================
+           COPY CODE
+           ===================================================== */
+
+        copyButton.addEventListener(
+            "click",
+            async () => {
+
+
+                const code =
+                    GAME_CODE.trim();
+
+
+                try {
+
+
+                    await navigator.clipboard
+                        .writeText(
+                            code
+                        );
+
+
+                    copyButton.textContent =
+                        "COPIED";
+
+
+                    setTimeout(() => {
+
+
+                        copyButton.textContent =
+                            "COPY CODE";
+
+
+                    }, 1500);
+
+
+                }
+
+                catch {
+
+
+                    copyButton.textContent =
+                        "SELECT CODE MANUALLY";
+
+
+                }
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
